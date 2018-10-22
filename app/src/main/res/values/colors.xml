@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#e1e1e1</color>
+    <color name="colorAccent">#4885ed</color>
+
+    <color name="brandColor">#212121</color>
+
+    <color name="grey">#808080</color>
+    <color name="black">#000</color>
+
+    <color name="shimmer_color">#c7c7c7</color>
+    <color name="default_shimmer_color">@color/shimmer_color</color>
+</resources>

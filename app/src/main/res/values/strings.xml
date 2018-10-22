@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Wallpapers</string>
+    <string name="wallpapers">Wallpapers</string>
+
+    <!--Messages-->
+
+    <!--Errors-->
+    <string name="error_unknown">Unknown error occurred</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_timeout">Connection timed out</string>
+
+    <!--Misc-->
+    <string name="transition_image">imageTransition</string>
+</resources>
