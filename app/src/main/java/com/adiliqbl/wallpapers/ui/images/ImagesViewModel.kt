@@ -38,10 +38,10 @@ class ImagesViewModel
     private val imagesSourceFactory: ImagesDataSourceFactory = ImagesDataSourceFactory(compositeDisposable, api, activeFilter)
     var imageList: LiveData<PagedList<Image>> = LivePagedListBuilder<Int, Image>(imagesSourceFactory,
             PagedList.Config.Builder()
-                    .setEnablePlaceholders(true)
+                    .setEnablePlaceholders(false)
                     .setPageSize(PAGE_SIZE)
                     .setInitialLoadSizeHint(PAGE_SIZE)
-                    .setPrefetchDistance(0)
+                    .setPrefetchDistance(10)
                     .build()).build()
 
     fun onFilterChange(filter: Filter) {
