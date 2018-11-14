@@ -16,7 +16,7 @@ private const val PAGE_SIZE = 80
 
 class ImagesViewModel
 @Inject constructor(api: Api) : ViewModel() {
-    private var activeFilter = Filter("backgrounds", null)
+    private var activeFilter = Filter("nature", null)
     var filters: List<Filter> = arrayListOf(
             Filter("nature", "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg"),
             Filter("science", "https://cdn.pixabay.com/photo/2016/11/09/15/27/dna-1811955_960_720.jpg"),
@@ -41,7 +41,7 @@ class ImagesViewModel
                     .setEnablePlaceholders(false)
                     .setPageSize(PAGE_SIZE)
                     .setInitialLoadSizeHint(PAGE_SIZE)
-                    .setPrefetchDistance(10)
+                    .setPrefetchDistance(1)
                     .build()).build()
 
     fun onFilterChange(filter: Filter) {

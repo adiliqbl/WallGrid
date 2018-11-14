@@ -3,6 +3,7 @@ package com.adiliqbl.wallpapers.ui.images
 import android.arch.paging.PagedListAdapter
 import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 class ImagesPagedAdapter(private val glide: RequestManager, private val listener: ImagesListener) : PagedListAdapter<Image, ImagesPagedAdapter.ViewHolder>(Image.DIFF_CALLBACK) {
 
     interface ImagesListener {
-        fun onClick(sharedView: ImageView, image: Image)
+        fun onClick(holder: ImagesPagedAdapter.ViewHolder, image: Image, transitionName: String)
     }
 
     private var requestOptions = RequestOptions()
@@ -38,6 +39,8 @@ class ImagesPagedAdapter(private val glide: RequestManager, private val listener
     }
 
     override fun onBindViewHolder(holder: ImagesPagedAdapter.ViewHolder, position: Int) {
+        ViewCompat.setTransitionName(holder.image, "picture_$position")
+
         val image = getItem(position) as Image
         if (image.largeImageURL.isNullOrEmpty()) return
 
@@ -52,7 +55,7 @@ class ImagesPagedAdapter(private val glide: RequestManager, private val listener
 
         m.into(holder.image)
 
-        holder.itemView.setOnClickListener { listener.onClick(holder.image, getItem(position)!!) }
+        holder.itemView.setOnClickListener { listener.onClick(holder, getItem(position)!!, "picture_$position") }
 
         holder.image.transitionName = holder.itemView.context.getString(R.string.transition_image)
     }

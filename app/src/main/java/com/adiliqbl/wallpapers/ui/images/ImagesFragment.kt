@@ -60,13 +60,13 @@ class ImagesFragment : BaseFragment<ImagesViewModel>() {
         // Lists
         filtersAdapter = FiltersAdapter(viewModel.filters)
         imagesAdapter = ImagesPagedAdapter(glide, object : ImagesPagedAdapter.ImagesListener {
-            override fun onClick(sharedView: ImageView, image: Image) {
-                val fragmentTransaction = fragmentManager!!.beginTransaction()
-                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                fragmentTransaction.replace((view.parent as ViewGroup).id, ImageDetailsFragment.newInstance(image), tag)
-                fragmentTransaction.addToBackStack(tag)
-                fragmentTransaction.addSharedElement(sharedView, getString(R.string.transition_image))
-                fragmentTransaction.commit()
+            override fun onClick(holder: ImagesPagedAdapter.ViewHolder, image: Image, transitionName: String) {
+                fragmentManager!!
+                        .beginTransaction()
+                        .addSharedElement(holder.image, getString(R.string.transition_image))
+                        .replace(R.id.container, ImageDetailsFragment.newInstance(image, transitionName), tag)
+                        .addToBackStack(null)
+                        .commit()
             }
         })
 

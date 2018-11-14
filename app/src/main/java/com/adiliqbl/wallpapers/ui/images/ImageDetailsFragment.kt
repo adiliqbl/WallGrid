@@ -1,7 +1,14 @@
 package com.adiliqbl.wallpapers.ui.images
 
 import android.os.Bundle
+import android.support.v4.view.ViewCompat
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.ChangeTransform
+import android.transition.TransitionSet
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.adiliqbl.wallpapers.R
 import com.adiliqbl.wallpapers.data.Image
 import com.adiliqbl.wallpapers.ui.base.BaseFragment
@@ -14,14 +21,35 @@ class ImageDetailsFragment : BaseFragment<ImageDetailsViewModel>() {
 
     companion object {
         private const val KEY_IMAGE = "image"
+        private const val KEY_TRANSITION_NAME = "transitionName"
 
         @JvmStatic
-        fun newInstance(image: Image): ImageDetailsFragment {
+        fun newInstance(image: Image, transitionName: String): ImageDetailsFragment {
             val fragment = ImageDetailsFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_IMAGE, image)
+            bundle.putString(KEY_TRANSITION_NAME, transitionName)
             fragment.arguments = bundle
+
+            val transitionSet = TransitionSet()
+            transitionSet.ordering = android.support.transition.TransitionSet.ORDERING_TOGETHER
+            transitionSet.addTransition(ChangeBounds())
+                    .addTransition(ChangeTransform())
+                    .addTransition(ChangeImageTransform())
+
+            fragment.sharedElementEnterTransition = transitionSet
+            // fragment.enterTransition = Fade()
+            // fragment.exitTransition = Fade()
+            fragment.sharedElementReturnTransition = transitionSet
+
             return fragment
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return super.onCreateView(inflater, container, savedInstanceState).apply {
+            val transitionName = arguments?.getString(KEY_TRANSITION_NAME)
+            ViewCompat.setTransitionName(this.findViewById(R.id.image), transitionName)
         }
     }
 
