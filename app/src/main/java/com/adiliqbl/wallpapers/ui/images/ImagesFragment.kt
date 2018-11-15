@@ -19,7 +19,7 @@ import com.adiliqbl.wallpapers.data.Filter
 import com.adiliqbl.wallpapers.data.Image
 import com.adiliqbl.wallpapers.ui.base.BaseFragment
 import com.adiliqbl.wallpapers.util.Status
-import com.adiliqbl.wallpapers.util.toProperCase
+import com.adiliqbl.wallpapers.util.properCase
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -132,7 +132,7 @@ class ImagesFragment : BaseFragment<ImagesViewModel>() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val filter = list!![position]
 
-            holder.name.text = toProperCase(filter.name)
+            holder.name.text = filter.name.properCase()
             Glide.with(this@ImagesFragment)
                     .load(filter.image)
                     .apply(requestOptionsSmall)
