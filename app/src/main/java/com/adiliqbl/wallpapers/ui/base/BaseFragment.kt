@@ -33,3 +33,10 @@ abstract class BaseFragment<VM : ViewModel> : DaggerFragment() {
         return inflater.inflate(getLayoutRes(), container, false)
     }
 }
+
+
+inline fun <T : BaseFragment<*>> T.withArgs(argsBuilder: Bundle.() -> Unit): T {
+    return this.apply {
+        arguments = Bundle().apply(argsBuilder)
+    }
+}

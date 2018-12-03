@@ -60,10 +60,10 @@ class ImagesFragment : BaseFragment<ImagesViewModel>() {
         // Lists
         filtersAdapter = FiltersAdapter(viewModel.filters)
         imagesAdapter = ImagesPagedAdapter(glide, object : ImagesPagedAdapter.ImagesListener {
-            override fun onClick(holder: ImagesPagedAdapter.ViewHolder, image: Image, transitionName: String) {
+            override fun onClick(view: ImageView, image: Image, transitionName: String) {
                 fragmentManager!!
                         .beginTransaction()
-                        .addSharedElement(holder.image, getString(R.string.transition_image))
+                        .addSharedElement(view, getString(R.string.transition_image))
                         .replace(R.id.container, ImageDetailsFragment.newInstance(image, transitionName), tag)
                         .addToBackStack(null)
                         .commit()

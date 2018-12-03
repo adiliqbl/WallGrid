@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 class ImagesPagedAdapter(private val glide: RequestManager, private val listener: ImagesListener) : PagedListAdapter<Image, ImagesPagedAdapter.ViewHolder>(Image.DIFF_CALLBACK) {
 
     interface ImagesListener {
-        fun onClick(holder: ImagesPagedAdapter.ViewHolder, image: Image, transitionName: String)
+        fun onClick(view: ImageView, image: Image, transitionName: String)
     }
 
     private var requestOptions = RequestOptions()
@@ -55,7 +55,7 @@ class ImagesPagedAdapter(private val glide: RequestManager, private val listener
 
         m.into(holder.image)
 
-        holder.itemView.setOnClickListener { listener.onClick(holder, getItem(position)!!, "picture_$position") }
+        holder.itemView.setOnClickListener { listener.onClick(holder.image, getItem(position)!!, "picture_$position") }
 
         holder.image.transitionName = holder.itemView.context.getString(R.string.transition_image)
     }

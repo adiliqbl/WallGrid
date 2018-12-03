@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.adiliqbl.wallpapers.R
 import com.adiliqbl.wallpapers.data.Image
 import com.adiliqbl.wallpapers.ui.base.BaseFragment
+import com.adiliqbl.wallpapers.ui.base.withArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_image_details.*
@@ -23,7 +24,11 @@ class ImageDetailsFragment : BaseFragment<ImageDetailsViewModel>() {
         private const val KEY_IMAGE = "image"
         private const val KEY_TRANSITION_NAME = "transitionName"
 
-        @JvmStatic
+        fun newInstance(image: Image) = ImageDetailsFragment().withArgs {
+            putSerializable(KEY_IMAGE, image)
+            putString(KEY_TRANSITION_NAME, "imageTransition")
+        }
+
         fun newInstance(image: Image, transitionName: String): ImageDetailsFragment {
             val fragment = ImageDetailsFragment()
             val bundle = Bundle()
