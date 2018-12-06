@@ -27,7 +27,6 @@ class Image : Serializable {
     var previewURL: String? = null
 
     companion object {
-        @JvmStatic
         var DIFF_CALLBACK: DiffUtil.ItemCallback<Image> = object : DiffUtil.ItemCallback<Image>() {
             override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean {
                 return oldItem.id == newItem.id

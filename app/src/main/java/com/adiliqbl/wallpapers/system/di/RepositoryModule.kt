@@ -23,7 +23,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    @JvmStatic
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
                 .addNetworkInterceptor { chain ->
@@ -39,7 +38,6 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    @JvmStatic
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
         val moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
@@ -56,14 +54,12 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    @JvmStatic
     fun provideApi(imageService: ImageService): Api {
         return Api(imageService)
     }
 
     @Singleton
     @Provides
-    @JvmStatic
     fun provideImageService(retrofit: Retrofit): ImageService {
         return retrofit.create(ImageService::class.java)!!
     }

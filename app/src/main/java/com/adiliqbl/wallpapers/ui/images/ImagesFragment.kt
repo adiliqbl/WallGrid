@@ -19,7 +19,7 @@ import com.adiliqbl.wallpapers.data.Filter
 import com.adiliqbl.wallpapers.data.Image
 import com.adiliqbl.wallpapers.ui.base.BaseFragment
 import com.adiliqbl.wallpapers.util.Status
-import com.adiliqbl.wallpapers.util.toProperCase
+import com.adiliqbl.wallpapers.util.properCase
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -60,13 +60,13 @@ class ImagesFragment : BaseFragment<ImagesViewModel>() {
         // Lists
         filtersAdapter = FiltersAdapter(viewModel.filters)
         imagesAdapter = ImagesPagedAdapter(glide, object : ImagesPagedAdapter.ImagesListener {
-            override fun onClick(sharedView: ImageView, image: Image) {
-                val fragmentTransaction = fragmentManager!!.beginTransaction()
-                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                fragmentTransaction.replace((view.parent as ViewGroup).id, ImageDetailsFragment.newInstance(image), tag)
-                fragmentTransaction.addToBackStack(tag)
-                fragmentTransaction.addSharedElement(sharedView, getString(R.string.transition_image))
-                fragmentTransaction.commit()
+            override fun onClick(view: ImageView, image: Image, transitionName: String) {
+                fragmentManager!!
+                        .beginTransaction()
+                        .addSharedElement(view, getString(R.string.transition_image))
+                        .replace(R.id.container, ImageDetailsFragment.newInstance(image, transitionName), tag)
+                        .addToBackStack(null)
+                        .commit()
             }
         })
 
@@ -132,7 +132,7 @@ class ImagesFragment : BaseFragment<ImagesViewModel>() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val filter = list!![position]
 
-            holder.name.text = toProperCase(filter.name)
+            holder.name.text = filter.name.properCase()
             Glide.with(this@ImagesFragment)
                     .load(filter.image)
                     .apply(requestOptionsSmall)

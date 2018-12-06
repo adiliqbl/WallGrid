@@ -20,9 +20,9 @@ class ImagesDataSourceFactory(private val compositeDisposable: CompositeDisposab
     val imagesDataSourceLiveData = MutableLiveData<ImagesDataSource>()
 
     override fun create(): DataSource<Int, Image> {
-        val newsDataSource = ImagesDataSource(compositeDisposable, api, filter)
-        imagesDataSourceLiveData.postValue(newsDataSource)
-        return newsDataSource
+        val imagesDataSource = ImagesDataSource(compositeDisposable, api, filter)
+        imagesDataSourceLiveData.postValue(imagesDataSource)
+        return imagesDataSource
     }
 }
 
