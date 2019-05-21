@@ -4,6 +4,10 @@ import android.content.Context
 import com.adiliqbl.wallpapers.system.Application
 import dagger.Binds
 import dagger.Module
+import javax.inject.Singleton
+import dagger.Provides
+
+
 
 /**
  * This is a Dagger module. We use this to bind our Application class as a Context in the AppComponent
